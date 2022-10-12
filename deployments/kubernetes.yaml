@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-messages-go
+  labels:
+    app: server-messages-go
+spec:
+  selector:
+    matchLabels:
+      app: server-messages-go
+  template:
+    metadata:
+      labels:
+        app: server-messages-go
+    spec:
+      containers:
+      - name: server-messages-go
+        image: alen/server-messages
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5050
