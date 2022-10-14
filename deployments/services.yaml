@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app.kubernetes.io/name: server-messages-go
+  ports:
+    - protocol: TCP
+      port: 5050
+      targetPort: 5050
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: server-messages-go
+                port:
+                  number: 5050
+            path: /
